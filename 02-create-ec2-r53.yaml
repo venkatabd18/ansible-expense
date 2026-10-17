@@ -35,3 +35,7 @@
       wait: true
     loop: "{{ instances }}"
     register: ec2_info
+
+  - name: print ec2 info to get the data for r53 record
+    ansible.builtin.debug:
+      msg: "{{ ec2_info }}"

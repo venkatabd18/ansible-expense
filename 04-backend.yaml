@@ -39,9 +39,8 @@
       remote_src: yes
 
   - name: install npm
-    ansible.builtin.package:
-      name: npm
-      state: present
+    community.general.npm:
+      path: /app
 
 
 

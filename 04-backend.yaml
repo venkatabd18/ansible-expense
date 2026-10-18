@@ -23,3 +23,24 @@
       name: /app
       state: "directory"
 
+  - name: create expense user 
+    ansible.builtin.user:
+      name: expense
+
+  - name: download backend code
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/daws-92s/expense-documentation/refs/heads/main/artifacts/expense-backend-v5.tar.gz
+      dest: /tmp/backend.tar.gz
+
+  - name: extract the backend code
+    ansible.builtin.unarchive:
+      src: /tmp/backend.tar.gz
+      dest: /app
+      remote_src: yes
+
+  - 
+
+
+
+  
+

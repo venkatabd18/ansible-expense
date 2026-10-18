@@ -3,7 +3,7 @@
   become: yes
 
   tasks:
-  - name: install mysql database
+  - name: Create a new database with name 'mysql'
     ansible.mysql.mysql_db:
-      name: "mysql"
-      state: "present"
+      name: mysql
+      state: present

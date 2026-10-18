@@ -1,0 +1,9 @@
+- name: install and configure mysql
+  hosts: mysql
+  become: yes
+
+  tasks:
+  - name: install mysql database
+    ansible.mysql.mysql_db:
+      name: "mysql"
+      state: "present"

@@ -1,0 +1,39 @@
+- name: configure frontend
+  hosts: frontend
+  become: yes
+
+  tasks:
+  - name: install nginx
+    ansible.builtin.package:
+      name: nginx
+      state: present
+
+  - name: start nginx
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: remove the default nginx html content
+    ansible.builtin.command: rm -rf /usr/share/nginx/html/*
+
+  - name: download the code
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/daws-92s/expense-documentation/refs/heads/main/artifacts/expense-frontend-v5.tar.gz
+      dest: /tmp/frontend.tar.gz
+
+  - name: extract the frontend code
+    ansible.builtin.unarchive:
+      src: /tmp/frontend.tar.gz
+      dest: /usr/share/nginx/html
+      remote_src: yes
+
+  - name: copy the frontend configure
+    ansible.builtin.copy:
+      src: expense.conf
+      dest: /etc/nginx/default.d/expense.conf
+
+  - name: restart the nginx
+    ansible.builtin.service:
+      name: nginx
+      state: restarted

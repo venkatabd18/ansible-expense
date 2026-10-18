@@ -1,9 +1,8 @@
 - name: install and configure mysql
   hosts: mysql
   become: yes
-
   tasks:
-  - name: Create a new database with name 'mysql'
-    ansible.mysql.mysql_db:
-      name: mysql
-      state: present
+  - name: pringing the task info
+    ansible.builtin.debug:
+      msg: installing mysql server
+

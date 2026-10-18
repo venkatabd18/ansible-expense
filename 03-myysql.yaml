@@ -1,6 +1,10 @@
 - name: configure mysql server
   hosts: mysql
   become: yes
+  vars:
+    login_host: mysql.venra.online
+    root_password: ExpenseApp@1
+    login_user: root
 
   tasks:
   - name: installing mysql server
@@ -12,4 +16,11 @@
     ansible.builtin.service:
       name: mysql
       state: started
-      enable: yes
+      enabled: yes
+
+  - name: gather the mysql info
+    community.mysql.mysql_info:
+      login_host: '{{ login_host }}'
+      login_password: '{{ root_password }}'
+      login_user: '{{ login_user }}'
+    register: mysql_info

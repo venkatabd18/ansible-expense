@@ -58,7 +58,7 @@
       
   - name: load the database schema
     community.mysql.mysql_db:
-      name: expense
+      name: all
       login_host: "{{ login_host }}"
       login_password: "{{ root_password }}"
       login_user: "{{ login_user }}"

@@ -18,16 +18,6 @@
       state: started
       enabled: yes
 
-  - name: setting up root password
-    ansible.builtin.command: mysql_secure_installation --set-root-pass {{ root_password }}
-
-  - name: connect to the mysql server
-    ansible.mysql.mysql_db:
-      login_host: "{{ login_host }}"
-      login_user: "{{ login_user }}"
-      login_password: "{{ root_password }}"
-      name: "expense"
-      state: present
 
 
  

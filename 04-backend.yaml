@@ -47,6 +47,15 @@
       src: backend.service
       dest: /etc/systemd/system/backend.service
       
+  - name: load the database schema
+    community.mysql.mysql_db:
+      name: expense
+      login_host: "{{ login_host }}"
+      login_password: "{{ root_password }}"
+      login_user: "{{ login_user }}"
+      state: "import"
+      target: /app/schema/backend.sql
+
 
 
 

@@ -18,6 +18,11 @@
       state: started
       enabled: yes
   
+  - name: install pymysql
+    ansible.builtin.pip:
+      name: PyMySQL
+      state: present
+  
   - name: gather the mysql info
     community.mysql.mysql_info:
       login_host: '{{ login_host }}'

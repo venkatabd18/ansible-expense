@@ -39,3 +39,31 @@
   - name: print ec2 info to get the data for r53 record
     ansible.builtin.debug:
       msg: "{{ ec2_info }}"
+
+  - name: create private r53 records
+    amazon.aws.route53:
+      state: "present"
+      zone: "{{ zone }}"
+      record: "{{ item.item }}.{{ zone }}"
+      value: "{{ item.instances[0].private_ip_address }}"
+      type: A 
+      ttl: 1
+      wait: true
+      overwrite: true
+    loop: "{{ ec2_info.results }}"
+
+  - name: create public r53 record
+    amazon.aws.route53:
+      state: "present"
+      zone: "{{ zone }}"
+      record: "{{ zone }}"
+      value: "{{ item.instances[0].public_ip_address }}"
+      type: A 
+      ttl: 1
+      wait: true
+      overwrite: true
+    loop: "{{ ec2_info. results }}"
+    when: item.item == "frontend"
+
+
+

@@ -1,0 +1,14 @@
+- name: configure backend
+  hosts: backend
+  become: yes
+  vars:
+    login_host: mysql.venra.online
+    root_password: ExpenseApp@1
+    login_user: root
+
+  tasks:
+  - name: install nodejs
+    ansible.builtin.package:
+      name: nodejs
+      state: present
+

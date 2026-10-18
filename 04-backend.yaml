@@ -15,8 +15,11 @@
 
   - name: install nodejs
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: present
+    loop:
+      - nodejs
+      - mysql
 
   - name: create app dir
     ansible.builtin.file:
@@ -46,6 +49,12 @@
     ansible.builtin.copy:
       src: backend.service
       dest: /etc/systemd/system/backend.service
+
+  - name: install PyMySQL
+    ansible.builtin.pip:
+      name: PyMySQL
+      state: present
+      executable: pip3.9
       
   - name: load the database schema
     community.mysql.mysql_db:

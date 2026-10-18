@@ -7,6 +7,12 @@
     login_user: root
 
   tasks:
+  - name: install PyMySQL
+    ansible.builtin.pip:
+      name: PyMySQL
+      state: present
+      executable: pip3.9
+      
   - name: installing mysql server
     ansible.builtin.package:
       name: mysql-server

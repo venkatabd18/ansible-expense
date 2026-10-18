@@ -18,11 +18,18 @@
       state: started
       enabled: yes
   
+  # - name: gather the mysql info
+  #   ansible.mysql.mysql_info:
+  #     login_host: '{{ login_host }}'
+  #     login_password: '{{ root_password }}'
+  #     login_user: '{{ login_user }}
+  #   register: mysql_info
+
   - name: gather the mysql info
     ansible.mysql.mysql_info:
-      login_host: "{{ login_host }}"
-      login_password: "{{ root_password }}"
-      login_user: "{{ login_user }}"
+      login_host: '{{ login_host }}'
+      login_password: '{{ root_password }}'
+      login_user: '{{ login_user }}'
     register: mysql_info
 
 

@@ -3,6 +3,8 @@
   become: yes
   vars:
     root_password: ExpenseApp@1
+    login_host: mysql.venra.online
+    login_user: root
   
   tasks:
   - name: installing mysql server
@@ -17,6 +19,15 @@
       enabled: yes
 
   - name: setting up root password
-    ansible.builtin.command: mysql_secure_installation --set-root-pass ExpenseApp@1
+    ansible.builtin.command: mysql_secure_installation --set-root-pass {{ root_password }}
+
+  - name: connect to the mysql server
+    ansible.mysql.mysql_db:
+      login_host: "{{ login_host }}"
+      login_user: "{{ login_user }}"
+      login_password: "{{ root_password }}"
+      name: "expense"
+      state: present
+
 
  

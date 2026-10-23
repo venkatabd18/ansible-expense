@@ -8,6 +8,8 @@ CHECK_ROOT(){
     fi
 }
 
+CHECK_ROOT
+
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
@@ -17,8 +19,6 @@ VALIDATE(){
         echo "$2 is SUCCESS"
     fi 
 }
-
-CHECK_ROOT
 
 echo "Script execution time is : $(date)"
 

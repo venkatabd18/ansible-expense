@@ -1,6 +1,7 @@
 - name: create 3 ec2 instances and respective r53 records
   hosts: local
   connection: local
+  become: yes
   vars:
     instances:
       - mysql
